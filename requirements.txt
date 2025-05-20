@@ -1,0 +1,5 @@
+alpaca-trade-api
+pytz
+requests
+yfinance
+textblob

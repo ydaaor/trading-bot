@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>רובוט מסחר אוטומטי</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<header>
+    רובוט מסחר אוטומטי - Dashboard
+</header>
+
+<div class="container">
+    <section class="buttons">
+        <button onclick="startScan()">התחל סריקה</button>
+        <button onclick="stopScan()">עצור סריקה</button>
+    </section>
+
+    <section class="status">
+        <h2>מצב סריקה</h2>
+        <p id="scan-status">לא פעיל</p>
+    </section>
+
+    <section class="scan-results">
+        <h2>תוצאות סריקה אחרונה</h2>
+        <div id="results-container">
+            {% if scan_results %}
+                {% for result in scan_results %}
+                    <div class="result-item">
+                        <strong>סימול:</strong> {{ result }}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>לא נמצאו תוצאות סריקה.</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="about">
+        <h2>מה הרובוט עושה?</h2>
+        <ul>
+            <li>סריקת מניות מתוך רשימת נכסים זמינים באלפאקה</li>
+            <li>בדיקת שווי שוק, נפח מסחר, ופרמטרים טכניים כמו RSI ו-MACD</li>
+            <li>ניתוח חדשות ורגשות שוק לפי כותרות מהאינטרנט</li>
+            <li>ביצוע קנייה/מכירה אוטומטית לפי התנאים שנקבעו</li>
+            <li>סריקה מחודשת כל 5 דקות לצורך התאמות</li>
+        </ul>
+    </section>
+</div>
+
+<script>
+    function startScan() {
+        fetch('/start_scan')
+            .then(response => response.json())
+            .then(data => {
+                alert(data.status);
+                document.getElementById('scan-status').innerText = "פעיל";
+            });
+    }
+
+    function stopScan() {
+        fetch('/stop_scan')
+            .then(response => response.json())
+            .then(data => {
+                alert(data.status);
+                document.getElementById('scan-status').innerText = "לא פעיל";
+            });
+    }
+</script>
+
+</body>
+</html>
