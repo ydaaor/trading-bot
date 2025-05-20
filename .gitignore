@@ -1,0 +1,23 @@
+# קבצי הגדרות רגישים
+.env
+*.env
+
+# קבצי קומפילציה של Python
+__pycache__/
+*.pyc
+*.pyo
+
+# קבצי מערכת של VSCode / PyCharm / IDEs
+.vscode/
+.idea/
+
+# קבצים של מערכת הפעלה
+.DS_Store
+Thumbs.db
+
+# קבצים של Heroku או Render שיווצרו אוטומטית
+*.log
+
+# תיקיות וירטואליות (אם אתה משתמש)
+venv/
+env/
